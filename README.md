@@ -88,3 +88,7 @@ php artisan serve
 npm run dev
 ```
 
+# Themes einstellen
+
+In der Datei resources/css/app.css lassen sich die Farbkombinationen einstellen.
+Dabeo kann man entweder ganz frei vorgehen oder man verwendet diesen Helper [shadcn-themes](https://www.shadcn-vue.com/themes)
