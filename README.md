@@ -1,7 +1,13 @@
 # Starter Laravel Inertia Vue ShadCn Tailwind IBM Plex Font
-Verwendet diese UI-Library:
-(shadcn-vue)[https://www.shadcn-vue.com/]
-# Folgende Komponenten sind bereits installiert:
+
+Dieses Projekt verwendet die folgende UI-Library:  
+[shadcn-vue](https://www.shadcn-vue.com/)
+
+## Bereits installierte Komponenten
+
+Die folgenden Komponenten wurden bereits mit `shadcn-vue` installiert:
+
+```bash
 npx shadcn-vue@latest add button
 npx shadcn-vue@latest add dropdown-menu
 npx shadcn-vue@latest add card
