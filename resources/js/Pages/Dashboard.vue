@@ -17,7 +17,7 @@ import {RangeCalendar} from '@/components/ui/range-calendar'
 import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover'
 import {cn} from '@/lib/utils'
 import DonutChart from "@/components/ui/chart-donut/DonutChart.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
+import PrimaryButton from "@/components/PrimaryButton.vue";
 
 
 const df = new DateFormatter('en-US', {
