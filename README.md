@@ -74,6 +74,17 @@ npx shadcn-vue@latest add chart-line
 npx shadcn-vue@latest add chart-line
 npx shadcn-vue@latest add chart-donut
 ```
-# Zur Verwendung benutzt man die Vue-Komponenten aus dem ORdner
 
+# Zur Verwendung benutzt man die Vue-Komponenten aus dem Ordner
+```
+resources/js/Components/ui/
+```
+
+
+# Testserver starten
+
+```
+php artisan serve
+npm run dev
+```
 
