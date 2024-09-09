@@ -1,4 +1,4 @@
-# Starter Laravel Inertia Vue ShadCn Tailwind IBM Plex Font
+# Starter Laravel Inertia Vue ShadCn Tailwind
 
 Dieses Projekt verwendet die folgende UI-Library:  
 [shadcn-vue](https://www.shadcn-vue.com/)
