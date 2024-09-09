@@ -3,6 +3,19 @@
 Dieses Projekt verwendet die folgende UI-Library:  
 [shadcn-vue](https://www.shadcn-vue.com/)
 
+# Installation
+```bash
+composer install
+npm install
+```
+
+.env von .env.example kopieren
+
+```bash
+php artisan migrate
+php artisan key:generate
+```
+
 ## Bereits installierte Komponenten
 
 Die folgenden Komponenten wurden bereits mit `shadcn-vue` installiert:
@@ -60,4 +73,7 @@ npx shadcn-vue@latest add chart-area
 npx shadcn-vue@latest add chart-line
 npx shadcn-vue@latest add chart-line
 npx shadcn-vue@latest add chart-donut
+```
+# Zur Verwendung benutzt man die Vue-Komponenten aus dem ORdner
+
 
