@@ -56,3 +56,8 @@ npx shadcn-vue@latest add toast
 npx shadcn-vue@latest add toggle
 npx shadcn-vue@latest add toggle-group
 npx shadcn-vue@latest add tooltip
+npx shadcn-vue@latest add chart-area
+npx shadcn-vue@latest add chart-line
+npx shadcn-vue@latest add chart-line
+npx shadcn-vue@latest add chart-donut
+

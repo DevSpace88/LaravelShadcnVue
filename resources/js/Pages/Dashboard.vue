@@ -34,6 +34,7 @@ import { RangeCalendar } from '@/components/ui/range-calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
 import {Toaster} from "vue-sonner";
+import DonutChart from "@/components/ui/chart-donut/DonutChart.vue";
 
 const df = new DateFormatter('en-US', {
     dateStyle: 'medium',
@@ -52,6 +53,20 @@ const accordionItems = [
     { value: 'item-3', title: 'Can it be animated?', content: 'Yes! You can use the transition prop to configure the animation.' },
 ]
 
+
+
+const data = [
+    { name: 'Jan', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
+    { name: 'Feb', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
+    { name: 'Mar', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
+    { name: 'Apr', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
+    { name: 'May', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
+    { name: 'Jun', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
+]
+
+const valueFormatter = (tick: number | Date) => typeof tick === 'number' ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}` : ''
+
+
 </script>
 
 <template>
@@ -62,10 +77,29 @@ const accordionItems = [
             <h2 class="font-semibold text-xl leading-tight">Dashboard</h2>
         </template>
 
+
+
+
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class=" overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 font-bold"><h1>Keine Ahnung was ein Toaster macht</h1></div>
+                    <div class="p-6 font-bold">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class=" overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 font-bold">
+                            <DonutChart
+                                index="name"
+                                :category="'total'"
+                                :data="data"
+                                :value-formatter="valueFormatter"
+                            />
+                    </div>
                 </div>
             </div>
         </div>
