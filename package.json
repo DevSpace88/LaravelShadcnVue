@@ -22,7 +22,6 @@
         "vue-tsc": "^2.0.24"
     },
     "dependencies": {
-        "@iconify-json/lucide": "^1.2.3",
         "@tanstack/vue-table": "^8.20.5",
         "@unovis/ts": "^1.4.3-beta.0",
         "@unovis/vue": "^1.4.3-beta.0",

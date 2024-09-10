@@ -18,6 +18,7 @@ import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover'
 import {cn} from '@/lib/utils'
 import DonutChart from "@/components/ui/chart-donut/DonutChart.vue";
 import PrimaryButton from "@/components/PrimaryButton.vue";
+import Jumbotron from "@/components/Jumbotron.vue";
 
 
 const df = new DateFormatter('en-US', {
@@ -68,12 +69,12 @@ const valueFormatter = (tick: number | Date) => typeof tick === 'number' ? `$ ${
             <h2 class="font-semibold text-xl leading-tight">Dashboard</h2>
         </template>
 
-
+        <Jumbotron/>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class=" overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 font-bold">
-
+<!--                        <Jumbotron/>-->
                     </div>
                 </div>
             </div>
