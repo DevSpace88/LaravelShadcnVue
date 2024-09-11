@@ -56,11 +56,6 @@ const showingNavigationDropdown = ref(false);
                                     Example Dashboard
                                 </NavLink>
                             </div>
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('admin.users.index')" :active="route().current('admin.users.index')">
-                                    Users Dashboard
-                                </NavLink>
-                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -94,13 +89,17 @@ const showingNavigationDropdown = ref(false);
 
                                     <template #content>
                                         <DropdownMenu>
-                                        <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
-                                        <DropdownLink :href="route('logout')" method="post" as="button">
-                                            Log Out
-                                        </DropdownLink>
+                                            <DropdownLink v-if="$page.props.auth.user && $page.props.auth.user.isAdmin" :href="route('admin.users.index')">
+                                                Admin Dashboard
+                                            </DropdownLink>
+                                            <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
+                                            <DropdownLink :href="route('logout')" method="post" as="button">
+                                                Log Out
+                                            </DropdownLink>
                                         </DropdownMenu>
                                     </template>
                                 </Dropdown>
+
                             </div>
                         </div>
 
@@ -163,6 +162,9 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <div class="mt-3 space-y-1">
+                            <ResponsiveNavLink v-if="$page.props.auth.user && $page.props.auth.user.isAdmin" :href="route('admin.users.index')" :active="route().current('admin.users.index')">
+                                Admin Dashboarddd
+                            </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('profile.edit')"> Profile </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('logout')" method="post" as="button">
                                 Log Out

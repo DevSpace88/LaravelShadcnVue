@@ -23,19 +23,12 @@ Route::get('/example-dashboard', function () {
     return Inertia::render('ExampleDashboard');
 })->middleware(['auth', 'verified'])->name('example-dashboard');
 
-//Route::middleware(['auth', 'admin'])->group(function () {
-//    Route::prefix('admin')->name('admin.')->group(function () {
-//        Route::resource('users', UserController::class);
-//        Route::put('/admin/users/{user}/toggle-verification', [UserController::class, 'toggleVerification'])
-//            ->name('admin.users.toggle-verification');
-//    });
-//});
-
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('users', UserController::class);
-        Route::put('users/{user}/toggle-verification', [UserController::class, 'toggleVerification'])
-            ->name('users.toggle-verification');
+        Route::put('users/{user}/toggle-verification', [UserController::class, 'toggleVerification'])->name('users.toggle-verification');
+        Route::put('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+        Route::delete('users/{id}/force-delete', [UserController::class, 'forceDelete'])->name('users.forceDelete');
     });
 });
 
