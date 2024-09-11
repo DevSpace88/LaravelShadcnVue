@@ -299,18 +299,7 @@ const data = [
 <!--            <h2 class="font-semibold text-xl leading-tight">Dashboard</h2>-->
 <!--        </template>-->
 
-<!--    <div class="md:hidden">-->
-<!--        <VPImage-->
-<!--            alt="Dashboard"-->
-<!--            width="1280"-->
-<!--            height="1214" class="block" :image="{-->
-<!--        dark: '/examples/dashboard-dark.png',-->
-<!--        light: '/examples/dashboard-light.png',-->
-<!--      }"-->
-<!--        />-->
-<!--    </div>-->
-
-    <div class="hidden flex-col md:flex">
+    <div class="flex-col md:flex">
         <div class="border-b">
             <div class="flex h-16 items-center px-4">
                 <TeamSwitcher />
@@ -321,13 +310,13 @@ const data = [
                 </div>
             </div>
         </div>
-        <div class="flex-1 space-y-4 p-8 pt-6">
-            <div class="flex items-center justify-between space-y-2">
+        <div class="flex-1 space-y-4 sm:p-0 md:p-8 pt-6">
+            <div class="flex sm:flex-col md:flex-row items-center justify-between space-y-2">
                 <h2 class="text-3xl font-bold tracking-tight">
                     Dashboard
                 </h2>
-                <div class="flex items-center space-x-2">
-                    <DateRangePicker />
+                <div class="flex sm:flex-col md:flex-row items-center space-x-2">
+                    <DateRangePicker class="m-4" />
                     <Button>Download</Button>
                 </div>
             </div>
@@ -460,7 +449,7 @@ const data = [
                             </CardContent>
                         </Card>
                     </div>
-                    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+                    <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-7">
                         <Card class="col-span-4">
                             <CardHeader>
                                 <CardTitle>Overview</CardTitle>
@@ -469,7 +458,7 @@ const data = [
                                 <Overview />
                             </CardContent>
                         </Card>
-                        <Card class="col-span-3">
+                        <Card class="sm:col-span-2 md:col-span-3">
                             <CardHeader>
                                 <CardTitle>Recent Sales</CardTitle>
                                 <CardDescription>
@@ -483,7 +472,7 @@ const data = [
                     </div>
 
                     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                        <Card class="col-span-4">
+                        <Card class="sm:col-span-2 md:col-span-4">
                             <CardHeader>
                                 <CardTitle>Overview</CardTitle>
                             </CardHeader>
@@ -500,9 +489,9 @@ const data = [
                                 />
                             </CardContent>
                         </Card>
-                        <Card class="col-span-3">
+                        <Card class="sm:col-span-2 md:col-span-3">
                             <CardHeader>
-                                <CardTitle>Recent Sales</CardTitle>
+                                <CardTitle>Recent Salesdd</CardTitle>
                                 <CardDescription>
                                     You made 265 sales this month.
                                 </CardDescription>

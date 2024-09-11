@@ -112,10 +112,10 @@ const valueFormatter = (tick: number | Date) => typeof tick === 'number' ? `$ ${
         </div>
 
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="flex py-12">
+            <div class="max-w-7xl mx-auto">
                 <div class="overflow-hidden shadow-sm sm:rounded-lg">
-                    <p class="p-6 text-gray-900">
+                    <p class="text-gray-900">
                         <Card class="w-[350px]">
                             <CardHeader>
                                 <CardTitle>Create project</CardTitle>
@@ -166,10 +166,10 @@ const valueFormatter = (tick: number | Date) => typeof tick === 'number' ? `$ ${
         </div>
 
 
-        <div class="py-12">
+        <div class="py-12 flex">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6">
+                    <div class="mx-auto">
                         <Popover>
                             <PopoverTrigger as-child>
                                 <Button

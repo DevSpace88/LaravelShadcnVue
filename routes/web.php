@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,6 +22,22 @@ Route::get('/dashboard', function () {
 Route::get('/example-dashboard', function () {
     return Inertia::render('ExampleDashboard');
 })->middleware(['auth', 'verified'])->name('example-dashboard');
+
+//Route::middleware(['auth', 'admin'])->group(function () {
+//    Route::prefix('admin')->name('admin.')->group(function () {
+//        Route::resource('users', UserController::class);
+//        Route::put('/admin/users/{user}/toggle-verification', [UserController::class, 'toggleVerification'])
+//            ->name('admin.users.toggle-verification');
+//    });
+//});
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::resource('users', UserController::class);
+        Route::put('users/{user}/toggle-verification', [UserController::class, 'toggleVerification'])
+            ->name('users.toggle-verification');
+    });
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
