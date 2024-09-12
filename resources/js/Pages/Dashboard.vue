@@ -17,9 +17,11 @@ import {RangeCalendar} from '@/components/ui/range-calendar'
 import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover'
 import {cn} from '@/lib/utils'
 import DonutChart from "@/components/ui/chart-donut/DonutChart.vue";
-import PrimaryButton from "@/components/PrimaryButton.vue";
 import Jumbotron from "@/components/Jumbotron.vue";
+import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from '@/components/ui/carousel'
 
+import ImageDisplay from "@/components/ImageDisplay.vue";
+import {string} from "zod";
 
 const df = new DateFormatter('en-US', {
     dateStyle: 'medium',
@@ -58,7 +60,30 @@ const data = [
 
 const valueFormatter = (tick: number | Date) => typeof tick === 'number' ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}` : ''
 
+// Das hier geht gerade
+const props = defineProps<{
+    imagePaths?: string[]
+}>()
 
+// Das hier wäre bei nicht Arrays
+// const props = defineProps({
+//     imagePaths: string,
+// })
+
+
+// Das hier würde auch gehen, aber ist unnötig länger
+// import { onMounted } from 'vue'
+
+
+// interface Props {
+//     imagePaths: string[]
+// }
+//
+// const props = defineProps<Props>()
+//
+// onMounted(() => {
+//     console.log('Image Paths:', props.imagePaths)
+// })
 </script>
 
 <template>
@@ -74,11 +99,38 @@ const valueFormatter = (tick: number | Date) => typeof tick === 'number' ? `$ ${
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class=" overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 font-bold">
-<!--                        <Jumbotron/>-->
+                        <!--                        <Jumbotron/>-->
                     </div>
                 </div>
             </div>
         </div>
+
+
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 font-bold">
+                        <Carousel v-slot="{ canScrollNext }" class="relative w-full mx-auto max-w-5xl">
+                            <CarouselContent>
+                                <CarouselItem v-for="(imagePath, index) in imagePaths" :key="index">
+                                    <div class="p-1">
+                                        <Card>
+                                            <CardContent class="flex aspect-square items-center justify-center p-6">
+<!--                                                <span class="text-4xl font-semibold">{{ index + 1 }}</span>-->
+                                                <ImageDisplay :image-path="imagePath" alt-text="Galeriebild"/>
+                                            </CardContent>
+                                        </Card>
+                                    </div>
+                                </CarouselItem>
+                            </CarouselContent>
+                            <CarouselPrevious/>
+                            <CarouselNext v-if="canScrollNext"/>
+                        </Carousel>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class=" overflow-hidden shadow-sm sm:rounded-lg">
