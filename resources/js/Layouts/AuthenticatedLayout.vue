@@ -8,24 +8,35 @@ import ResponsiveNavLink from '@/components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 import DarkModeButton from "@/components/ui/button/DarkModeButton.vue";
 
-
 import {
-    Breadcrumb,
-    BreadcrumbEllipsis,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    navigationMenuTriggerStyle,
+} from '@/components/ui/navigation-menu'
+import DynamicBreadcrumbs from "@/components/DynamicBreadcrumbs.vue";
 
 const showingNavigationDropdown = ref(false);
+
+const components: { title: string, href: string, description: string }[] = [
+    {
+        title: 'Alert Dialog',
+        href: '/docs/primitives/alert-dialog',
+        description:
+            'A modal dialog that interrupts the user with important content and expects a response.',
+    },
+    {
+        title: 'Hover Card',
+        href: '/docs/primitives/hover-card',
+        description:
+            'For sighted users to preview content available behind a link.',
+    },
+    // ... (andere Komponenten hier hinzufügen)
+    // aber kann man auch unten machen direkt
+];
 </script>
 
 <template>
@@ -45,17 +56,72 @@ const showingNavigationDropdown = ref(false);
                                 </Link>
                             </div>
 
-                            <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </NavLink>
-                            </div>
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('example-dashboard')" :active="route().current('example-dashboard')">
-                                    Example Dashboard
-                                </NavLink>
-                            </div>
+                            <!-- Navigation Menu -->
+                            <NavigationMenu class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavigationMenuList>
+                                    <NavigationMenuItem>
+                                        <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+                                        <NavigationMenuContent>
+                                            <ul class="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                                                <li class="row-span-3">
+                                                    <NavigationMenuLink as-child>
+                                                        <NavLink class="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md" :href="route('example-dashboard')">
+                                                            <div class="mb-2 mt-4 text-lg font-medium">
+                                                                shadcn/ui
+                                                            </div>
+                                                            <p class="text-sm leading-tight text-muted-foreground">
+                                                                Beautifully designed components built with Radix UI and
+                                                                Tailwind CSS.
+                                                            </p>
+                                                        </NavLink>
+                                                    </NavigationMenuLink>
+                                                </li>
+                                                <li>
+                                                    <NavigationMenuLink as-child>
+                                                        <a href="/docs" class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                                                            <div class="text-sm font-medium leading-none">Introduction</div>
+                                                            <p class="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                                                Re-usable components built using Radix UI and Tailwind CSS.
+                                                            </p>
+                                                        </a>
+                                                    </NavigationMenuLink>
+                                                </li>
+                                                <!-- Weitere Menüpunkte hier -->
+                                            </ul>
+                                        </NavigationMenuContent>
+                                    </NavigationMenuItem>
+                                    <NavigationMenuItem>
+                                        <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+                                        <NavigationMenuContent>
+                                            <ul class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                                                <li v-for="component in components" :key="component.title">
+                                                    <NavigationMenuLink as-child>
+                                                        <a
+                                                            :href="component.href"
+                                                            class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                                        >
+                                                            <div class="text-sm font-medium leading-none">{{ component.title }}</div>
+                                                            <p class="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                                                {{ component.description }}
+                                                            </p>
+                                                        </a>
+                                                    </NavigationMenuLink>
+                                                </li>
+                                            </ul>
+                                        </NavigationMenuContent>
+                                    </NavigationMenuItem>
+                                    <NavigationMenuItem>
+                                        <NavigationMenuLink :href="route('dashboard')" :class="navigationMenuTriggerStyle()">
+                                            Dashboard
+                                        </NavigationMenuLink>
+                                    </NavigationMenuItem>
+                                    <NavigationMenuItem>
+                                        <NavigationMenuLink :href="route('example-dashboard')" :class="navigationMenuTriggerStyle()">
+                                            Example Dashboard
+                                        </NavigationMenuLink>
+                                    </NavigationMenuItem>
+                                </NavigationMenuList>
+                            </NavigationMenu>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -88,18 +154,15 @@ const showingNavigationDropdown = ref(false);
                                     </template>
 
                                     <template #content>
-                                        <DropdownMenu>
-                                            <DropdownLink v-if="$page.props.auth.user && $page.props.auth.user.isAdmin" :href="route('admin.users.index')">
-                                                Admin Dashboard
-                                            </DropdownLink>
-                                            <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
-                                            <DropdownLink :href="route('logout')" method="post" as="button">
-                                                Log Out
-                                            </DropdownLink>
-                                        </DropdownMenu>
+                                        <DropdownLink v-if="$page.props.auth.user && $page.props.auth.user.isAdmin" :href="route('admin.users.index')">
+                                            Admin Dashboard
+                                        </DropdownLink>
+                                        <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
+                                        <DropdownLink :href="route('logout')" method="post" as="button">
+                                            Log Out
+                                        </DropdownLink>
                                     </template>
                                 </Dropdown>
-
                             </div>
                         </div>
 
@@ -163,7 +226,7 @@ const showingNavigationDropdown = ref(false);
 
                         <div class="mt-3 space-y-1">
                             <ResponsiveNavLink v-if="$page.props.auth.user && $page.props.auth.user.isAdmin" :href="route('admin.users.index')" :active="route().current('admin.users.index')">
-                                Admin Dashboarddd
+                                Admin Dashboard
                             </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('profile.edit')"> Profile </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('logout')" method="post" as="button">
@@ -181,43 +244,13 @@ const showingNavigationDropdown = ref(false);
                 </div>
             </header>
 
+            <!-- Breadcrumb -->
+            <div class="mt-8 mb-6">
+                <DynamicBreadcrumbs />
+            </div>
+
             <!-- Page Content -->
             <main>
-                <div class="mt-8 mb-6">
-                    <Breadcrumb class="ml-4">
-                        <BreadcrumbList>
-                            <BreadcrumbItem>
-                                <BreadcrumbLink href="/">
-                                    Home
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger class="flex items-center gap-1">
-                                        <BreadcrumbEllipsis class="h-4 w-4" />
-                                        <span class="sr-only">Toggle menu</span>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent align="start">
-                                        <DropdownMenuItem>Documentation</DropdownMenuItem>
-                                        <DropdownMenuItem>Themes</DropdownMenuItem>
-                                        <DropdownMenuItem>GitHub</DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                                <BreadcrumbLink href="/docs/components/accordion.html">
-                                    Components
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                                <BreadcrumbPage>Admin Dashboard</BreadcrumbPage>
-                            </BreadcrumbItem>
-                        </BreadcrumbList>
-                    </Breadcrumb>
-                </div>
                 <slot />
             </main>
         </div>
