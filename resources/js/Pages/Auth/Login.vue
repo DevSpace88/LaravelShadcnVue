@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useForm, Link } from '@inertiajs/vue3'
 import InputError from '@/components/InputError.vue'
 import Checkbox from '@/components/ui/checkbox/Checkbox.vue'
