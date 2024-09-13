@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import ApplicationLogo from "@/components/ApplicationLogo.vue";
 
 defineProps<{
     canResetPassword?: boolean;
@@ -31,6 +32,7 @@ const submit = () => {
 <template>
     <Card class="w-full max-w-sm mx-auto pb-8 mt-48">
         <CardHeader>
+          <ApplicationLogo class="h-9 w-auto mx-auto"/>
             <CardTitle class="text-2xl">
                 Login
             </CardTitle>

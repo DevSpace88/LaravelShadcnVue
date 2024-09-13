@@ -27,14 +27,14 @@ import { buttonVariants } from '@/components/ui/button'
             >
                 Login
             </a>
-            <a
-                href="/register"
-                :class="cn(
-                    buttonVariants({ variant: 'ghost' })
-                )"
-            >
-                Register
-            </a>
+<!--            <a-->
+<!--                href="/register"-->
+<!--                :class="cn(-->
+<!--                    buttonVariants({ variant: 'ghost' })-->
+<!--                )"-->
+<!--            >-->
+<!--                Register-->
+<!--            </a>-->
         </div>
 
         <div class="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">

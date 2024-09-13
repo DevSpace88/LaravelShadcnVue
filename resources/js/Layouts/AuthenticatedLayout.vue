@@ -245,7 +245,7 @@ const components: { title: string, href: string, description: string }[] = [
             </header>
 
             <!-- Breadcrumb -->
-            <div class="mt-8 mb-6">
+            <div class="mt-8 mb-6 ml-8">
                 <DynamicBreadcrumbs />
             </div>
 
