@@ -111,14 +111,14 @@ const components: { title: string, href: string, description: string }[] = [
                                         </NavigationMenuContent>
                                     </NavigationMenuItem>
                                     <NavigationMenuItem>
-                                        <NavigationMenuLink :href="route('dashboard')" :class="navigationMenuTriggerStyle()">
+                                        <Link :href="route('dashboard')" :class="navigationMenuTriggerStyle()">
                                             Dashboard
-                                        </NavigationMenuLink>
+                                        </Link>
                                     </NavigationMenuItem>
                                     <NavigationMenuItem>
-                                        <NavigationMenuLink :href="route('example-dashboard')" :class="navigationMenuTriggerStyle()">
+                                        <Link :href="route('example-dashboard')" :class="navigationMenuTriggerStyle()">
                                             Example Dashboard
-                                        </NavigationMenuLink>
+                                        </Link>
                                     </NavigationMenuItem>
                                 </NavigationMenuList>
                             </NavigationMenu>
