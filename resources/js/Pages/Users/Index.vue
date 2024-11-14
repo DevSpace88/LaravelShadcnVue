@@ -45,46 +45,8 @@
                                             <TableHead>Actions</TableHead>
                                         </TableRow>
                                     </TableHeader>
-<!--                                    <TableBody>-->
-<!--                                        <TableRow v-for="user in filteredUsers" :key="user.id">-->
-<!--                                            <TableCell class="font-medium">{{ user.name }}</TableCell>-->
-<!--                                            <TableCell>{{ user.email }}</TableCell>-->
-<!--                                            <TableCell>-->
-<!--                                                <Badge :variant="user.email_verified_at ? 'outline' : 'secondary'">-->
-<!--                                                    {{ user.email_verified_at ? 'Verified' : 'Unverified' }}-->
-<!--                                                </Badge>-->
-<!--                                            </TableCell>-->
-<!--                                            <TableCell>{{ formatDate(user.created_at) }}</TableCell>-->
-<!--                                            <TableCell>-->
-<!--                                                <DropdownMenu>-->
-<!--                                                    <DropdownMenuTrigger as-child>-->
-<!--                                                        <Button size="icon" variant="ghost">-->
-<!--                                                            <MoreHorizontal class="h-4 w-4" />-->
-<!--                                                            <span class="sr-only">Open menu</span>-->
-<!--                                                        </Button>-->
-<!--                                                    </DropdownMenuTrigger>-->
-<!--                                                    <DropdownMenuContent align="end">-->
-<!--                                                        <DropdownMenuItem @click="editUser(user)" v-if="!user.deleted_at">Edit</DropdownMenuItem>-->
-<!--                                                        <DropdownMenuItem @click="showUser(user)">View</DropdownMenuItem>-->
-<!--                                                        <DropdownMenuItem @click="toggleVerification(user)" v-if="user.id !== $page.props.auth.user.id && !user.deleted_at">-->
-<!--                                                            {{ user.email_verified_at ? 'Unverify' : 'Verify' }}-->
-<!--                                                        </DropdownMenuItem>-->
-<!--                                                        <DropdownMenuItem @click="softDeleteUser(user)" v-if="user.id !== $page.props.auth.user.id && !user.deleted_at">-->
-<!--                                                            Soft Delete-->
-<!--                                                        </DropdownMenuItem>-->
-<!--                                                        <DropdownMenuItem @click="restoreUser(user)" v-if="user.deleted_at">-->
-<!--                                                            Restore-->
-<!--                                                        </DropdownMenuItem>-->
-<!--                                                        <DropdownMenuItem @click="forceDeleteUser(user)" v-if="user.id !== $page.props.auth.user.id">-->
-<!--                                                            Permanently Delete-->
-<!--                                                        </DropdownMenuItem>-->
-<!--                                                    </DropdownMenuContent>-->
-<!--                                                </DropdownMenu>-->
-<!--                                            </TableCell>-->
-<!--                                        </TableRow>-->
-<!--                                    </TableBody>-->
                                     <TableBody>
-<!--                                        <TableRow v-for="user in filteredUsers" :key="user.id" :class="{ 'opacity-50': user.deleted_at }">-->
+                                        <TableRow v-for="user in filteredUsers" :key="user.id" :class="{ 'opacity-50': user.deleted_at }">
                                             <TableRow v-for="user in users.data" :key="user.id" :class="{ 'opacity-50': user.deleted_at }">
                                             <TableCell class="font-medium">{{ user.name }}</TableCell>
                                             <TableCell>{{ user.email }}</TableCell>
@@ -290,6 +252,10 @@ const userForm = useForm({
 const toggleVerificationForm = useForm({});
 
 const validatePasswords = () => {
+    console.log('Password:', userForm.password);
+    console.log('Password Confirmation:', userForm.password_confirmation);
+    console.log('Are equal?:', userForm.password === userForm.password_confirmation);
+
     if (userForm.password || userForm.password_confirmation) {
         if (userForm.password !== userForm.password_confirmation) {
             passwordConfirmationError.value = 'The password confirmation does not match.';
@@ -301,9 +267,23 @@ const validatePasswords = () => {
     }
 };
 
+
+// Modify the isFormValid computed property
 const isFormValid = computed(() => {
-    return userForm.name && userForm.email && !passwordConfirmationError.value &&
-        (!isEditing.value || (isEditing.value && (!userForm.password || userForm.password === userForm.password_confirmation)));
+    const hasRequiredFields = userForm.name && userForm.email;
+
+    if (isEditing.value) {
+        // For editing: either both password fields should be empty or they should match
+        const hasValidPasswords = (!userForm.password && !userForm.password_confirmation) ||
+            (userForm.password && userForm.password === userForm.password_confirmation);
+        return hasRequiredFields && hasValidPasswords;
+    } else {
+        // For new users: require passwords and they must match
+        const hasValidPasswords = userForm.password &&
+            userForm.password_confirmation &&
+            userForm.password === userForm.password_confirmation;
+        return hasRequiredFields && hasValidPasswords;
+    }
 });
 
 const closeUserModal = () => {
@@ -362,8 +342,14 @@ const closeViewUserModal = () => {
 };
 
 const submitUserForm = () => {
+    // Validate passwords one last time before submitting
+    validatePasswords();
+
+    if (passwordConfirmationError.value) {
+        return; // Don't submit if there are password errors
+    }
+
     if (isEditing.value) {
-        // Remove password fields if they're empty
         const formData = {...userForm};
         if (!formData.password) {
             delete formData.password;
@@ -381,7 +367,6 @@ const submitUserForm = () => {
         });
     }
 };
-
 
 const deleteForm = useForm({});
 const restoreForm = useForm({});

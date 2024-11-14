@@ -31,7 +31,6 @@ Route::get('/example-dashboard', function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
 
-//        Route::resource('/', AdminController::class);
         Route::get('/' ,function (){
             return Inertia::render('ExampleDashboard');
         });
