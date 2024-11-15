@@ -46,8 +46,7 @@
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody>
-                                        <TableRow v-for="user in filteredUsers" :key="user.id" :class="{ 'opacity-50': user.deleted_at }">
-                                            <TableRow v-for="user in users.data" :key="user.id" :class="{ 'opacity-50': user.deleted_at }">
+                                        <TableRow v-for="user in users.data" :key="user.id" :class="{ 'opacity-50': user.deleted_at }">
                                             <TableCell class="font-medium">{{ user.name }}</TableCell>
                                             <TableCell>{{ user.email }}</TableCell>
                                             <TableCell>
