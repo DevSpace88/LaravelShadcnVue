@@ -10,6 +10,7 @@ export default defineConfig({
         laravel({
             input: 'resources/js/app.ts',
             refresh: true,
+            publicDirectory: 'resources',
         }),
         vue({
             template: {
@@ -27,4 +28,16 @@ export default defineConfig({
             autoInstall: true,  // Installiert benötigte Icons automatisch
         }),
     ],
+    build: {
+        rollupOptions: {
+            output: {
+                assetFileNames: (assetInfo) => {
+                    if (assetInfo.name.match(/\.(woff2?|eot|ttf|otf)$/)) {
+                        return 'fonts/[name][extname]';
+                    }
+                    return 'assets/[name]-[hash][extname]';
+                },
+            },
+        },
+    },
 });
