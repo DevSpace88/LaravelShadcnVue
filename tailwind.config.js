@@ -89,7 +89,9 @@ module.exports = {
                 "collapsible-up": "collapsible-up 0.2s ease-in-out",
             },
             fontFamily: {
-                sans: ['IBM Plex Sans', 'sans-serif'],
+                // sans: ['IBM Plex Sans', 'sans-serif'],
+                'sans': ['silkaregular', 'system-ui', 'sans-serif'],
+                'sans-italic': ['silkaregular_italic', 'system-ui', 'sans-serif'],
             },
         },
     },
