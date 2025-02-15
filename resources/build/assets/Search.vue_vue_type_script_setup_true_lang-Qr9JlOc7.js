@@ -1,0 +1,1 @@
+import{_ as e}from"./Input.vue_vue_type_script_setup_true_lang-D4u-QKuK.js";import{d as a,o as r,c,a as o,u as s}from"./app-_9kzSgCd.js";const l=a({__name:"Search",setup(n){return(t,p)=>(r(),c("div",null,[o(s(e),{type:"search",placeholder:"Search...",class:"md:w-[100px] lg:w-[300px]"})]))}});export{l as _};

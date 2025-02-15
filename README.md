@@ -73,6 +73,8 @@ npx shadcn-vue@latest add chart-area
 npx shadcn-vue@latest add chart-line
 npx shadcn-vue@latest add chart-line
 npx shadcn-vue@latest add chart-donut
+
+npm install -D unplugin-icons @iconify/json
 ```
 
 # Zur Verwendung benutzt man die Vue-Komponenten aus dem Ordner
