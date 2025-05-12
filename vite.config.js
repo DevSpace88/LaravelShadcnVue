@@ -10,7 +10,8 @@ export default defineConfig({
         laravel({
             input: 'resources/js/app.ts',
             refresh: true,
-            publicDirectory: 'resources',
+            // Entfernen Sie diese Zeile oder setzen Sie sie auf 'public'
+            // publicDirectory: 'resources',
         }),
         vue({
             template: {
@@ -21,11 +22,10 @@ export default defineConfig({
             },
         }),
         Components({
-            // Resolver, der Icons aus unplugin-icons automatisch importiert
             resolvers: IconsResolver(),
         }),
         Icons({
-            autoInstall: true,  // Installiert benötigte Icons automatisch
+            autoInstall: true,
         }),
     ],
     build: {
